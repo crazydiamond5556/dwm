@@ -11,23 +11,22 @@ static const unsigned int gappoh    = 10;       /* horiz outer gap between windo
 static const unsigned int gappov    = 30;       /* vert outer gap between windows and screen edge */
 static const int smartgaps          = 0;        /* 1 means no outer gap when there is only one window */
 static const int showbar            = 1;        /* 0 means no bar */
-static const int topbar             = 0;        /* 0 means bottom bar */
-static const char *fonts[]          = { "Inconsolata:size=15" };
-static const char dmenufont[]       = "Inconsolata:size=15";
+static const int topbar             = 1;        /* 0 means bottom bar */
+static const char *fonts[]          = { "Inconsolata:size=17" };
+static const char dmenufont[]       = "Inconsolata:size=17";
 static const char col_gray1[]       = "#121314";
 static const char col_gray2[]       = "#444444";
 static const char col_gray3[]       = "#bbbbbb";
 static const char col_gray4[]       = "#eeeeee";
-static const char col_cyan[]        = "#005577";
-static const char col_bar[]	    = "#2e3440";
+static const char col_cyan[]        = "#770000";
 static const char *colors[][3]      = {
 	/*               fg         bg         border   */
 	[SchemeNorm] = { col_gray3, col_gray1, col_gray2 },
-	[SchemeSel]  = { col_gray4, col_bar,  col_cyan  },
+	[SchemeSel]  = { col_gray4, col_cyan,  col_cyan  },
 };
 
 /* tagging */
-static const char *tags[] = { "1", "2", "3", "4" };
+static const char *tags[] = { "", "" };
 
 static const Rule rules[] = {
 	/* xprop(1):
@@ -35,8 +34,7 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "surf",  NULL,       NULL,       1 << 1,       0,           -1 },
 };
 
 /* layout(s) */
@@ -75,7 +73,6 @@ static const Key keys[] = {
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,			XK_w,	   spawn,          SHCMD("tabbed -c surf -e")},
-	{ MODKEY,			XK_e,	   spawn,	   SHCMD(TERMINAL " -e mail")},
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -139,4 +136,4 @@ static const Button buttons[] = {
 	{ ClkTagBar,            0,              Button3,        toggleview,     {0} },
 	{ ClkTagBar,            MODKEY,         Button1,        tag,            {0} },
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
-}
+};
